@@ -1,16 +1,26 @@
 <template>
-<Header></Header>
-<div class='w-full flex'>
-    <router-view></router-view>
+<div class="w-full flex">
+    <div class="m-auto">
+        <h1 class="text-2xl text-center">DC Heros {{herosCount}}</h1>
+        <ul>
+            <li v-for="(hero,index) in dcHero" :key="index">
+                <div class="flex justify-between">
+                    {{hero.name}}
+                    <button @click="remove(index)">&times;</button>
+                </div>
+            </li>
+        </ul>
+
+        <form action="" class="mt-10" @submit.prevent="addNewHero">
+            <input class="border rounded mr-3" placeholder="Enter Hero Man" v-model.trim="newHero" />
+            <button class="border rounded bg-gradient-to-r from-red-700 to-pink-500 text-sm text-white p-1" type="submit">Add Hero</button>
+        </form>
+    </div>
 </div>
 </template>
 
 <script>
-import Header from "./components/AppHeader";
 export default {
-    components: {
-        Header,
-    },
     data() {
         return {
             newHero: "",
@@ -30,9 +40,6 @@ export default {
                     name: "BatMan"
                 }
             ],
-            fname: "nooralam",
-            lname: "khan"
-
         }
     },
     methods: {
@@ -45,9 +52,6 @@ export default {
             }
             this.newHero = ''
         },
-        ranM() {
-            return Math.random();
-        },
         remove(index) {
             this.dcHero = this.dcHero.filter((hero, i) => i !== index)
         }
@@ -56,16 +60,10 @@ export default {
         herosCount() {
             return this.dcHero.length;
         },
-        renc() {
-            return this.dcHero.length + Math.random();
-        },
-        fullname() {
-            return this.fname + " " + this.lname;
-        }
     }
 }
 </script>
 
 <style >
-  
+
 </style>
